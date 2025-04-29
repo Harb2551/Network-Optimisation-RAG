@@ -1,0 +1,30 @@
+version: 1
+configuration:
+  has_webserver: true
+  scoring:
+    command: pip install -r requirements.txt && python3 -m pytest --junit-xml=unit.xml
+    files:
+      - unit.xml
+  ide_config:
+    default_open_files:
+      - app.py
+      - src/rag_chain.py
+      - src/vector_store.py
+      - src/document_loader.py
+    project_menu:
+      run: streamlit run app.py --server.port 8000
+      install: pip install -r requirements.txt
+      test: python3 -m pytest
+  readonly_paths:
+    - tests/conftest.py
+    - tests/test_rag_chain.py
+    - tests/test_document_loader.py
+    - tests/test_integration.py
+    - tests/test_vector_store.py
+    - data/src_incident_records.csv
+    - data/src_tech_records.csv
+    - data/metadata_tech_records.csv
+    - data/metadata_incident_records.csv
+  data_source_files:
+    - data/src_incident_records.csv
+    - data/src_tech_records.csv
